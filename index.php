@@ -3,11 +3,7 @@
 
 
 class HttpServer{
-		
-
-	public function __construct(){
-	}
-
+	
 	public function start(){
 		require_once('form.php');
 		if(empty($_FILES)){}
