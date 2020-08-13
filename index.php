@@ -6,12 +6,12 @@ class HttpServer{
 
     private $path_list_of_file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingToServer/upload/';
 
+
    
     public function start(){
         require_once('form.php');
         $this->upload_func('inputFile', 'upload/');
         $this->out_list_file($this->filtering_array(scandir($this->path_list_of_file)));
-
     }
 
 
@@ -25,26 +25,25 @@ class HttpServer{
             echo $this->search_same_name_file($this->filtering_array(scandir($this->path_list_of_file)), basename($_FILES[$nameInputForm]['name']));
             if($this->search_same_name_file($this->filtering_array(scandir($this->path_list_of_file)), basename($_FILES[$nameInputForm]['name']))){
                 $addname = rand(0, 10000); 
+                //$uploaddir записать в базу как значение, а ключ "$addname.'_'.basename($_FILES[$nameInputForm]['name'])
                 $upload = $uploaddir.$addname.'_'.basename($_FILES[$nameInputForm]['name']);        
                 move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
-                header('location: /index.php');
+                $this->send_headers();
+                
             }
             else{
+                //$uploaddir записать в базу как значение, а ключ "$addname.'_'.basename($_FILES[$nameInputForm]['name'])
                 $upload = $uploaddir.basename($_FILES[$nameInputForm]['name']);
                 move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
-                header('location: /index.php');
+                $this->send_headers();
             }
         }
     }
 
 
-    static private function filter_name_file($var){
-        if(($var == '.')or($var == '..')){
-            return False;
-        }
-        else{
-            return True;
-        }
+    private function send_headers(){
+        $file = $this->path_list_of_file.'test.pdf';
+        header('location: /index.php');
         
     }
     
@@ -60,14 +59,16 @@ class HttpServer{
 
 
     private function filtering_array($array){
-        $sortered_array = array_filter($array, 'HttpServer::filter_name_file');
-        return $sortered_array;
+        return array_filter($array, function ($var) {
+          return !(($var == '.')or($var == '..')); 
+        });
     }
 
 
     private function out_list_file($sortedArray){
         foreach ($sortedArray as $value) {
-            echo '-> <a href="http://'.$_SERVER['HTTP_HOST'].'/upload/'.$value.'">'.$value.'</a> <br/>';
+            //в ссылке добавить параметр id 
+            echo '-> <a href="/script.php?path=/upload/'.$value.'">'.$value.'</a> <br/>';
         }
     }
 }
@@ -76,3 +77,7 @@ class HttpServer{
 
 $start = new HttpServer();
 $start->start();
+
+
+//Запретить браузеру открытие pdf файла.
+//Файл хранить под каким угодно именем, но выдавать на скачку с оригинальным именем.
