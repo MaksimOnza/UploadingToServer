@@ -12,7 +12,7 @@ class HttpServer{
         require_once('form.php');
         $this->upload_func('inputFile', 'upload/');
         $this->out_list_file($this->filtering_array(scandir($this->path_list_of_file)));
-    }
+            }
 
 
     private function upload_func($nameInputForm, $nameUploadDir){
@@ -36,6 +36,7 @@ class HttpServer{
     private function insert_file($addname, $uploaddir, $nameInputForm){
         $upload = $uploaddir.$addname.basename($_FILES[$nameInputForm]['name']);  
         execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$addname.basename($_FILES[$nameInputForm]['name']).'","'.$upload.'")');
+        move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
         header('location: /index.php');
     }
 
@@ -58,8 +59,10 @@ class HttpServer{
 
     private function out_list_file($sortedArray){
         $list_db = query('SELECT * FROM files_name;');
+        echo query('SELECT file_name FROM files_name WHERE id_file = 2')[0][0];
         foreach($list_db as $row){
-            print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';    
+            print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';
+
         }
     }
 }
@@ -68,6 +71,4 @@ class HttpServer{
 $start = new HttpServer();
 $start->start();
 
-
-//Запретить браузеру открытие pdf файла.
-//Файл хранить под каким угодно именем, но выдавать на скачку с оригинальным именем.
+//Prepared statement

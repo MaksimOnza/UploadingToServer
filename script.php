@@ -2,8 +2,9 @@
 
 require_once('db.php');
 
-$id = $_GET['id'];
-$file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingToServer'.$id;
+$id = (int)$_GET['id'];
+$file_name = query('SELECT file_name FROM files_name WHERE id_file = '.$id.'')[0];
+$file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingToServer/upload/'.$file_name[0];
 
 
 //if (file_exists($file)) {
@@ -18,4 +19,3 @@ $file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingT
     exit;
 //}
 
-query('SELECT files_name WHERE id_file = '.$id.'');

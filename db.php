@@ -27,6 +27,14 @@ function create_table(){
             );');
 }
 
+function create_key_table(){
+    execute('CREATE TABLE IF NOT EXISTS keys (
+            id_key integer PRIMARY KEY,
+            key_name text NOT NULL,
+            key_value text NOT NULL
+            );');
+}
+
 function execute($query){
     $db = open_db();
     return $db->exec($query);
