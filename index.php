@@ -22,33 +22,22 @@ class HttpServer{
         else{
             $addname = 0;
             $uploaddir = $nameUploadDir;
-            /*echo $this->search_same_name_file($this->filtering_array(scandir($this->path_list_of_file)), basename($_FILES[$nameInputForm]['name']));*/
             if($this->search_same_name_file($this->filtering_array(scandir($this->path_list_of_file)), basename($_FILES[$nameInputForm]['name']))){
                 $addname = rand(0, 10000); 
-                
-                //$uploaddir записать в базу как значение, а ключ "$addname.'_'.basename($_FILES[$nameInputForm]['name'])
-                $upload = $uploaddir.$addname.basename($_FILES[$nameInputForm]['name']);        
-                move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
-                execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$addname.basename($_FILES[$nameInputForm]['name']).'","'.$upload.'")');
-                
+                $this->insert_file($addname, $uploaddir, $nameInputForm);                
             }
             else{
-                //$uploaddir записать в базу как значение, а ключ "$addname.'_'.basename($_FILES[$nameInputForm]['name'])
-
-                $upload = $uploaddir.basename($_FILES[$nameInputForm]['name']);
-                move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
-                execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$addname.basename($_FILES[$nameInputForm]['name']).'","'.$upload.'")');
+                $this->insert_file($addname = '', $uploaddir, $nameInputForm);
             }
         }
     }
-
-
-    private function send_headers(){
-        $file = $this->path_list_of_file.'test.pdf';
-        header('location: /index.php');
-        
-    }
     
+
+    private function insert_file($addname, $uploaddir, $nameInputForm){
+        $upload = $uploaddir.$addname.basename($_FILES[$nameInputForm]['name']);  
+        execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$addname.basename($_FILES[$nameInputForm]['name']).'","'.$upload.'")');
+        header('location: /index.php');
+    }
 
     private function search_same_name_file($sortedArray, $fileName){
         foreach($sortedArray as $value){
@@ -68,15 +57,12 @@ class HttpServer{
 
 
     private function out_list_file($sortedArray){
-        foreach ($sortedArray as $value) {
-            //в ссылке добавить параметр id 
-            $list_db = execute('SELECT * FROM files_name;');
-            //echo $list_db;
-            echo '-> <a href="/script.php?id='.$id.'">'.$value.'</a> <br/>';
+        $list_db = query('SELECT * FROM files_name;');
+        foreach($list_db as $row){
+            print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';    
         }
     }
 }
-
 
 
 $start = new HttpServer();

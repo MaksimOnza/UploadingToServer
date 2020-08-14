@@ -1,7 +1,12 @@
 <?php
-$file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingToServer'.$_GET['path'];
 
-if (file_exists($file)) {
+require_once('db.php');
+
+$id = $_GET['id'];
+$file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingToServer'.$id;
+
+
+//if (file_exists($file)) {
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
@@ -11,4 +16,6 @@ if (file_exists($file)) {
     header('Content-Length: ' . filesize($file));
     readfile($file);
     exit;
-}
+//}
+
+query('SELECT files_name WHERE id_file = '.$id.'');
