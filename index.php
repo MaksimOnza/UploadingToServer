@@ -11,7 +11,8 @@ class HttpServer{
     public function start(){
         require_once('form.php');
         $this->upload_func('inputFile', 'upload/');
-        $this->out_list_file($this->filtering_array(scandir($this->path_list_of_file)));
+        $this->out_list_file();
+
             }
 
 
@@ -22,21 +23,22 @@ class HttpServer{
         else{
             $addname = 0;
             $uploaddir = $nameUploadDir;
-            if($this->search_same_name_file($this->filtering_array(scandir($this->path_list_of_file)), basename($_FILES[$nameInputForm]['name']))){
-                $addname = rand(0, 10000); 
-                $this->insert_file($addname, $uploaddir, $nameInputForm);                
+            if($this->search_same_name_file($this->filtering_array(query_select('files_name')), basename($_FILES[$nameInputForm]['name']))){
+                $this->insert_file($uploaddir, $nameInputForm);                
             }
             else{
-                $this->insert_file($addname = '', $uploaddir, $nameInputForm);
+                $this->insert_file($uploaddir, $nameInputForm);
             }
         }
     }
     
 
-    private function insert_file($addname, $uploaddir, $nameInputForm){
-        $upload = $uploaddir.$addname.basename($_FILES[$nameInputForm]['name']);  
-        execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$addname.basename($_FILES[$nameInputForm]['name']).'","'.$upload.'")');
-        move_uploaded_file($_FILES['inputFile']['tmp_name'], $upload);
+    private function insert_file($uploaddir, $nameInputForm){
+        $file_path = $uploaddir.basename($_FILES[$nameInputForm]['name']);
+        $file_name =  basename($_FILES[$nameInputForm]['name']);
+        query_insert($file_name, $file_path); 
+        //execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$file_name.'","'.$file_path.'")');
+        move_uploaded_file($_FILES['inputFile']['tmp_name'], $file_path);
         header('location: /index.php');
     }
 
@@ -57,9 +59,8 @@ class HttpServer{
     }
 
 
-    private function out_list_file($sortedArray){
-        $list_db = query('SELECT * FROM files_name;');
-        echo query('SELECT file_name FROM files_name WHERE id_file = 2')[0][0];
+    private function out_list_file(){
+        $list_db = query_select('SELECT * FROM files_name;');
         foreach($list_db as $row){
             print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';
 
@@ -70,5 +71,3 @@ class HttpServer{
 
 $start = new HttpServer();
 $start->start();
-
-//Prepared statement

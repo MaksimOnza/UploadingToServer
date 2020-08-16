@@ -8,6 +8,7 @@ $file = '/media/lenovo/Storage/Develop/projects/PHP/UploadingToServer/UploadingT
 
 
 //if (file_exists($file)) {
+	//header('location: /index.php');
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.basename($file).'"');
