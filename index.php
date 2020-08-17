@@ -11,9 +11,7 @@ class HttpServer{
     public function start(){
         require_once('form.php');
         $this->upload_func('inputFile', 'upload/');
-        $this->out_list_file();
-
-            }
+    }
 
 
     private function upload_func($nameInputForm, $nameUploadDir){
@@ -23,8 +21,7 @@ class HttpServer{
         else{
             $addname = 0;
             $uploaddir = $nameUploadDir;
-                $this->insert_file($uploaddir, $nameInputForm);
-            
+                $this->insert_file($uploaddir, $nameInputForm);           
         }
     }
     
@@ -51,9 +48,8 @@ class HttpServer{
         print '<div class="alert alert-danger" role="alert">';
         foreach($list_db as $row){
             print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';
-
         }
-        print '</div></div>';
+
     }
 }
 
