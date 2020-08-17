@@ -20,11 +20,9 @@ function query($query){
 }
 
 
-function query_select($table){
+function query_select(){
     $db = open_db();
-    $table = '%';
-    $statement = $db->prepare('SELECT * FROM files_name WHERE file_name != :table');
-    $statement->bindValue(':table', $table);
+    $statement = $db->prepare('SELECT * FROM files_name');
     $stmt = $statement->execute();
     $results = [];
     while($row = $stmt->fetchArray()){

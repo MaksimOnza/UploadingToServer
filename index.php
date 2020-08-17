@@ -23,12 +23,8 @@ class HttpServer{
         else{
             $addname = 0;
             $uploaddir = $nameUploadDir;
-            if($this->search_same_name_file($this->filtering_array(query_select('files_name')), basename($_FILES[$nameInputForm]['name']))){
-                $this->insert_file($uploaddir, $nameInputForm);                
-            }
-            else{
                 $this->insert_file($uploaddir, $nameInputForm);
-            }
+            
         }
     }
     
@@ -42,15 +38,6 @@ class HttpServer{
         header('location: /index.php');
     }
 
-    private function search_same_name_file($sortedArray, $fileName){
-        foreach($sortedArray as $value){
-            if($fileName == $value){
-                return True;
-            }
-        }
-        return False;
-    }
-
 
     private function filtering_array($array){
         return array_filter($array, function ($var) {
@@ -61,10 +48,12 @@ class HttpServer{
 
     private function out_list_file(){
         $list_db = query_select('SELECT * FROM files_name;');
+        print '<div class="alert alert-danger" role="alert">';
         foreach($list_db as $row){
             print '-> <a href="/script.php?id='.$row[0].'">'.$row[1].'</a> <br/>';
 
         }
+        print '</div></div>';
     }
 }
 
