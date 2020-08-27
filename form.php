@@ -3,7 +3,7 @@ require_once('header.php');
 ?>
     <div class="container">
 
-<?php require_once('index.php'); ?>
+<?php require_once('script_form.php'); ?>
 
     <div class="input-group input-group-prepend">
     <form action="" method="POST" enctype="multipart/form-data">
