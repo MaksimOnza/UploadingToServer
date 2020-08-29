@@ -24,3 +24,8 @@ $_SESSION['id'] = $myrow['id_user'];//эти данные очень часто 
 $_POST['id'] = $_SESSION['id'];
 $_SESSION['hello_form'] = False;
 header('Location: /index.php?path=file_list');
+
+//Как вставить hedaer and footer один раз, не разсовывая по файлам done
+//Сделать рабочее приложение
+//регистрация юзеров done
+//Шифрование паролей

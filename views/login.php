@@ -26,7 +26,7 @@
             <p>
                 <input class="btn btn-outline-secondary btn-light " type="submit" name="submit" value="Войти">
                 <br>
-                <a href="reg.php">Зарегистрироваться</a>
+                <a href="index.php?path=register">Зарегистрироваться</a>
             </p>
         </form>
     </div>
@@ -35,5 +35,4 @@
 
 
     </div>
-</div>
 </div>

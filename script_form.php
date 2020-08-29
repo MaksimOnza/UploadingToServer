@@ -6,7 +6,6 @@ function insert_file($uploaddir, $nameInputForm)
     $file_path = $uploaddir . basename($_FILES[$nameInputForm]['name']);
     $file_name = basename($_FILES[$nameInputForm]['name']);
     query_insert($file_name, $file_path, 1);
-    //execute('INSERT INTO files_name(file_name, file_path) VALUES("'.$file_name.'","'.$file_path.'")');
     move_uploaded_file($_FILES['inputFile']['tmp_name'], $file_path);
 }
 
@@ -28,9 +27,10 @@ function out_list_in_htmlselect($query)
         print '<option >' . $row['file_name'] . '</option>';
     }
 }
-
+print 'if(empty($_FILES)';
 out_list_file('SELECT * FROM files_name WHERE user_id = 1;');
-    if(!empty($_FILES)){
-        insert_file('upload/', 'inputFile');
-    }
-    $for_js = query_select('SELECT * FROM files_name WHERE user_id = 1;');
+if (!empty($_FILES)) {
+    insert_file('upload/', 'inputFile');
+    print 'if(empty($_FILES)';
+}
+//$for_js = query_select('SELECT * FROM files_name WHERE user_id = 1;');
