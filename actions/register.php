@@ -1,7 +1,7 @@
 <?php
 
 $login = $_REQUEST['login'] ?? '';
-$password = $_REQUEST['password'] ?? '';
+$password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT) ?? '';
 $errors = [];
 
 

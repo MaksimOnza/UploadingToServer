@@ -11,8 +11,8 @@ if (empty($login) or empty($password)) {
 $result = query_select("SELECT * FROM users WHERE login_user='$login'");
 $myrow = $result[0];
 
-if (empty($myrow['login_user']) or $myrow['pass_user'] !== $password) {
-    $errors[] = ("Извините, введённый вами login или пароль неверный. 2");
+if (empty($myrow['login_user']) or (!password_verify($password, $myrow['pass_user']))){
+    $errors[] = ("Извините, введённый вами login или пароль неверный.");
 }
 
 if ($errors !== []) {
@@ -20,7 +20,7 @@ if ($errors !== []) {
 }
 
 $_SESSION['login'] = $myrow['login_user'];
-$_SESSION['id'] = $myrow['id_user'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
+$_SESSION['id'] = $myrow['id_user'];
 $_POST['id'] = $_SESSION['id'];
 $_SESSION['hello_form'] = False;
 header('Location: /index.php?path=file_list');
@@ -28,4 +28,4 @@ header('Location: /index.php?path=file_list');
 //Как вставить hedaer and footer один раз, не разсовывая по файлам done
 //Сделать рабочее приложение
 //регистрация юзеров done
-//Шифрование паролей
+//Шифрование паролей done
