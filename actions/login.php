@@ -19,13 +19,9 @@ if ($errors !== []) {
     return require_once 'views/login.php';
 }
 
-$_SESSION['login'] = $myrow['login_user'];
-$_SESSION['id'] = $myrow['id_user'];
-$_POST['id'] = $_SESSION['id'];
-$_SESSION['hello_form'] = False;
-header('Location: /index.php?path=file_list');
+header('Location: /index.php?path=file_list&id=' . $myrow['id_user'] . '');
 
 //Как вставить hedaer and footer один раз, не разсовывая по файлам done
-//Сделать рабочее приложение
+//Сделать рабочее приложение almost
 //регистрация юзеров done
 //Шифрование паролей done

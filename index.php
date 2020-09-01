@@ -1,7 +1,7 @@
 <?php
 
 require_once("db.php");
-require_once 'header.php';
+require_once 'views/header.php';
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
@@ -31,4 +31,6 @@ if (strpos($path, 'upload') === 0) {
 if (strpos($path, 'download') === 0) {
     require_once 'actions/download.php';
 }
-require_once 'footer.php';
+require_once 'views/footer.php';
+
+//доделать загрузку на сервер через роутер
