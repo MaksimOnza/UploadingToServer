@@ -1,14 +1,24 @@
 <?php
 
 $login = $_REQUEST['login'] ?? '';
-$password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT) ?? '';
-$errors = [];
+$password = $_REQUEST['password'] ?? '';
 
+if (!login_validation_check($login, 3, 40)){
+    return 'error';
+}
+
+if (!password_validation_check($password, 10, 50)) {
+    return 'error';
+}
+
+$errors = [];
 
 if (empty($login) or empty($password)) {
     $errors[] = ("Извините, Вы ввели не полные данные.");
     return require_once 'views/register.php';
 }
+
+$password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT) ?? '';
 
 $resp_users = query_select("SELECT login_user FROM users");
 
