@@ -13,6 +13,6 @@ header('Content-Disposition: attachment; filename="' . $file_name . '"');
 header('Expires: 0');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
-header('Content-Length: db.php');
+header('Content-Length: ' . filesize($file));
 readfile($file);
 exit();

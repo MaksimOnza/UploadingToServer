@@ -20,8 +20,3 @@ if ($errors !== []) {
 }
 
 header('Location: /index.php?path=file_list&id=' . $myrow['id_user'] . '');
-
-//Как вставить hedaer and footer один раз, не разсовывая по файлам done
-//Сделать рабочее приложение almost
-//регистрация юзеров done
-//Шифрование паролей done

@@ -1,40 +1,30 @@
 <?php
 
 require_once("db.php");
+require_once 'actions/valid_code.php';
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 
 $path = $_REQUEST['path'];
 
-if (strpos($path, 'user') === 0) {
-    require_once 'actions/user.php';
+function redirect($path)
+{
+    $list_of_path = array(
+        "login",
+        "register",
+        "file_list",
+        "upload",
+        "download",
+    );
+    if (in_array($path, $list_of_path)) {
+        return require_once 'actions/' . $path . '.php';
+    } else {
+        return require_once 'actions/error_404.php';
+    }
 }
 
-if (strpos($path, 'login') === 0) {
-    require_once 'actions/login.php';
-}
-
-if (strpos($path, 'register') === 0) {
-    require_once 'actions/register.php';
-}
-
-if (strpos($path, 'file_list') === 0) {
-    require_once 'actions/file_list.php';
-}
-
-if (strpos($path, 'upload') === 0) {
-    require_once 'actions/upload.php';
-}
-
-if (strpos($path, 'download') === 0) {
-    require_once 'actions/download.php';
-}
-
-if (strpos($path, 'page_not_found') === 0) {
-    require_once 'actions/page_not_found.php';
-}
-
-//доделать загрузку на сервер через роутер
-//сделать шаблон страницы для подключения footer и header
-//применить валидацию
+require_once 'views/template.php';
+//доделать загрузку на сервер через роутер DONE
+//сделать шаблон страницы для подключения footer и header DONE
+//применить валидацию DONE

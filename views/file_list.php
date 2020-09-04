@@ -1,11 +1,11 @@
 <?php
 /**
  * @var $files array
+ * @var $print
  */
 
 
 ?>
-    <div class="container">
         <div>
             <div style="float: left; margin-right: 50px;">
                 <?php
@@ -27,9 +27,8 @@
     margin: 50px;
     }
 </style>
-
         <div class="input-group input-group-prepend" style="margin: 5px">
-            <form action="/index.php?path=upload" method="POST" enctype="multipart/form-data">
+            <form action="/index.php?path=upload&id=<?= $_REQUEST['id']?>" method="POST" enctype="multipart/form-data">
                 <div class="input-group" style="margin: 5px">
                     <input style="margin: 10px; width: 295px" class="form-control form-control-file" type="file" id="out_" name="inputFile" >
                     <input style="margin: 10px" class="btn btn-outline-secondary btn-light " id="button" type="submit" name="submit">
@@ -46,7 +45,7 @@
                 <input style="margin: 10px" id="link" class="btn btn-outline-secondary btn-light" type="button" value="display link">
             </div>
         </div>
-    </div>
+
 
 <?php
 

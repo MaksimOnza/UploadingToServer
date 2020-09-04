@@ -3,17 +3,18 @@
 $login = $_REQUEST['login'] ?? '';
 $password = $_REQUEST['password'] ?? '';
 
-if (!login_validation_check($login, 3, 40)){
-    return 'error';
+ if (!login_validation_check($login, 3, 10)){
+    return require_once 'views/register.php';
 }
 
 if (!password_validation_check($password, 10, 50)) {
-    return 'error';
+    return require_once 'views/register.php';
 }
 
 $errors = [];
 
 if (empty($login) or empty($password)) {
+    print "Извините, Вы ввели не полные данные.";
     $errors[] = ("Извините, Вы ввели не полные данные.");
     return require_once 'views/register.php';
 }
@@ -34,4 +35,3 @@ if (in_array($login, $array_list_users)) {
     query_insert_user($login, $password);
     header('Location: /index.php?path=login');
 }
-

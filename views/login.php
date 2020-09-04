@@ -3,15 +3,11 @@
  * @var $errors string[]
  */
 ?>
-
-<div class="container">
-
     <h2>Главная страница</h2>
     <?php
     foreach($errors as $er){
         print $er;
     }
-
     ?>
     <div class="input-group input-group-prepend">
         <form action="" class="alert alert-warning" method="post">
@@ -33,4 +29,3 @@
     <div class="input-group input-group-prepend">
         <br>
     </div>
-</div>
