@@ -1,2 +1,2 @@
 <?php
-require_once 'views/error_404.php';
+render('template', 'error_404');

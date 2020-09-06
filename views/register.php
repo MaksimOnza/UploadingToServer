@@ -1,9 +1,4 @@
-<?php
-/*
-* @var $print
-*/
 
-?>
 
     <h2>Страница регистраци</h2>
     <div class="input-group input-group-prepend">

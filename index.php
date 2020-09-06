@@ -8,7 +8,21 @@ ini_set('display_errors', true);
 
 $path = $_REQUEST['path'];
 
-function redirect($path)
+function render($template, $content)
+{
+    ob_start();
+    if (!empty ($content)) {
+        if (is_array($content)) {
+            extract(['files' => $content]);
+        } else {
+            extract(['content' => $content]);
+        }
+    }
+    require_once 'views/' . $template . '.php';
+    return ob_get_contents();
+}
+
+function run_action($path)
 {
     $list_of_path = array(
         "login",
@@ -17,14 +31,18 @@ function redirect($path)
         "upload",
         "download",
     );
+    ob_start();
     if (in_array($path, $list_of_path)) {
-        return require_once 'actions/' . $path . '.php';
+        require_once 'actions/' . $path . '.php';
     } else {
-        return require_once 'actions/error_404.php';
+        require_once 'actions/error_404.php';
     }
+    return ob_get_contents();
 }
 
-require_once 'views/template.php';
+run_action($path);
+
+
 //доделать загрузку на сервер через роутер DONE
 //сделать шаблон страницы для подключения footer и header DONE
 //применить валидацию DONE
