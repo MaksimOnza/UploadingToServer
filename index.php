@@ -8,21 +8,17 @@ ini_set('display_errors', true);
 
 $path = $_REQUEST['path'];
 
-function render($template, $content)
+
+function render(array $var = []): string
 {
+    global $path;
+    extract($var);
     ob_start();
-    if (!empty ($content)) {
-        if (is_array($content)) {
-            extract(['files' => $content]);
-        } else {
-            extract(['content' => $content]);
-        }
-    }
-    require_once 'views/' . $template . '.php';
+    include('views/' . $path . '.php');
     return ob_get_contents();
 }
 
-function run_action($path)
+function switch_action($path)
 {
     $list_of_path = array(
         "login",
@@ -34,15 +30,14 @@ function run_action($path)
     ob_start();
     if (in_array($path, $list_of_path)) {
         require_once 'actions/' . $path . '.php';
+        $out_ob = ob_get_contents();
     } else {
         require_once 'actions/error_404.php';
+        $out_ob = ob_get_contents();
     }
-    return ob_get_contents();
+    ob_clean();
+    return $out_ob;
 }
 
-run_action($path);
-
-
-//доделать загрузку на сервер через роутер DONE
-//сделать шаблон страницы для подключения footer и header DONE
-//применить валидацию DONE
+$content = switch_action($path);
+require_once 'views/template.php';

@@ -4,14 +4,10 @@ $login = $_REQUEST['login'] ?? '';
 $password = $_REQUEST['password'] ?? '';
 $errors = [];
 
-function render_login()
-{
-    $content = file_get_contents('views/' . $_REQUEST['path'] . '.php');
-    render('template', $content);
-}
 
 if (empty($login) or empty($password)) {
-    return render_login();
+    print'in actionsLOGIN\n';
+    return render(['errors' => $errors]);
 }
 
 $result = query_select("SELECT * FROM users WHERE login_user='$login'");
@@ -22,7 +18,7 @@ if (empty($myrow['login_user']) or (!password_verify($password, $myrow['pass_use
 }
 
 if ($errors !== []) {
-    return render_login();
+    return render(['errors' => $errors]);
 }
 
 header('Location: /index.php?path=file_list&id=' . $myrow['id_user'] . '');

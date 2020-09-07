@@ -1,3 +1,5 @@
 /upload
 .idea
 mysqlitedb.db
+test.php
+test_*

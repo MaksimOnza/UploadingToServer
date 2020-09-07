@@ -6,16 +6,20 @@
     <div>
         <div style="float: left; margin-right: 50px;">
             <?php
-
-            foreach ($files as $row) {
-                print $row['id_file'] . ' ' . $row['file_name'] . '</a> <br/>';
+            if (!empty($files)) {
+                foreach ($files as $row) {
+                    print $row['id_file'] . ' ' . $row['file_name'] . '</a> <br/>';
+                }
             }
+
             ?>
         </div>
         <div style="float: left; margin-right: 50px;">
             <?php
-            foreach ($files as $row) {
-                print '<a href="index.php?path=download&id=' . $row['id_file'] . '">' . $_SERVER['HTTP_HOST'] . '/actions/download.php?id=' . $row['id_file'] . '</a> <br/>';
+            if (!empty($files)) {
+                foreach ($files as $row) {
+                    print '<a href="index.php?path=download&id=' . $row['id_file'] . '">' . $_SERVER['HTTP_HOST'] . '/actions/download.php?id=' . $row['id_file'] . '</a> <br/>';
+                }
             }
             ?>
         </div>
@@ -37,8 +41,10 @@
         <div class="input-group" style="margin: 5px ">
             <select style="margin: 10px; width: 305px" size="1" id="listPath" name="list_db[]">
                 <?php
-                foreach ($files as $row) {
-                    print '<option >' . $row['file_name'] . '</option>';
+                if (!empty($files)) {
+                    foreach ($files as $row) {
+                        print '<option >' . $row['file_name'] . '</option>';
+                    }
                 }
                 ?>
             </select>
