@@ -1,20 +1,25 @@
 <?php
 
-function login_validation_check($str, $min, $max)
+function login_validation_check($login, $min, $max)
 {
-    if (!valid_not_empty($str)) {
-        print 'error valid_not_empty';
+    $resp_users = query_select("SELECT login_user FROM users");
+    $array_list_users = [];
+    foreach ($resp_users as $user) {
+        $array_list_users[] = $user['login_user'];
+    }
+    if (in_array($login, $array_list_users)) {
+        print 'error Такое имя уже сущуствует';
         return false;
     }
-    if (!valid_string($str)) {
+    if (!is_string($login)) {
         print 'error valid_string';
         return false;
     }
-    if (!valid_letter_and_int($str)) {
+    if (!valid_letter_and_int($login)) {
         print 'error valid_letter_and_int';
         return false;
     }
-    if (!valid_len($str, $min, $max)) {
+    if (!valid_len($login, $min, $max)) {
         print 'error valid_len';
         return false;
     }
@@ -23,55 +28,31 @@ function login_validation_check($str, $min, $max)
 
 function password_validation_check($str, $min, $max)
 {
-    if (!valid_not_empty($str)) {
-        return false;
-    }
-    if (!valid_string($str)) {
+    if (!is_string($str)) {
         return false;
     }
     if (!valid_len($str, $min, $max)) {
+        print 'wrong len';
         return false;
     }
     return true;
 }
 
-function id_validation_check($str)
+function id_validation_check($id)
 {
-    if (!valid_not_empty($str)) {
+    if (!empty($id)) {
         return false;
     }
-    if (valid_int($str)) {
+    if (!is_numeric($id)) {
         return false;
     }
+    return true;
 }
 
-function valid_not_empty($str)
-{
-    if (!empty($str)) {
-        return true;
-    }
-    return false;
-}
-
-function valid_string($str)
-{
-    if (is_string($str)) {
-        return true;
-    }
-    return false;
-}
-
-function valid_int($str)
-{
-    if (is_integer($str)) {
-        return true;
-    }
-    return false;
-}
 
 function valid_letter_and_int($str)
 {
-    if (is_string($str) || is_integer($str)) {
+    if (is_string($str) || is_numeric($str)) {
         return true;
     }
     return false;

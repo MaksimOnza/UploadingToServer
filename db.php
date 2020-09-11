@@ -4,8 +4,7 @@
 
 function open_db()
 {
-    $db = new \SQLite3('mysqlitedb.db');
-    return $db;
+    return new \SQLite3('mysqlitedb.db');
 
 }
 
@@ -73,11 +72,3 @@ function execute($query)
     $db = open_db();
     return $db->exec($query);
 }
-/*
-    ('CREATE TABLE IF NOT EXISTS users (
-            id_user integer PRIMARY KEY,
-            login_user text NOT NULL,
-            pass_user text NOT NULL
-            );');
-
-    ("INSERT INTO user(login_user, pass_user) VALUES(admin, admin)")*/

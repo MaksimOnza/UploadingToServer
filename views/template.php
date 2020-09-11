@@ -2,7 +2,7 @@
 /**
  * @var $content string
  */
-require_once 'views/header.php';
+render('header', []);
 ?>
 
     <div class="container">
@@ -11,4 +11,4 @@ require_once 'views/header.php';
     </div>
 
 <?php
-require_once 'views/footer.php';
+render('footer', []);
