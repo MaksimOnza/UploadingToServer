@@ -4,6 +4,6 @@ $files = query_select('SELECT * FROM files_name WHERE user_id = ' . $_REQUEST['i
 if(empty($files)){
     $files = [];
 }
-return render(['files'=>$files]);
+return render($_REQUEST['path'], ['files'=>$files]);
 
 

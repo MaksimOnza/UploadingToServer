@@ -6,8 +6,7 @@ $errors = [];
 
 
 if (empty($login) or empty($password)) {
-    print'in actionsLOGIN\n';
-    return render(['errors' => $errors]);
+    return render($_REQUEST['path'], ['errors' => $errors]);
 }
 
 $result = query_select("SELECT * FROM users WHERE login_user='$login'");
@@ -18,7 +17,7 @@ if (empty($myrow['login_user']) or (!password_verify($password, $myrow['pass_use
 }
 
 if ($errors !== []) {
-    return render(['errors' => $errors]);
+    return render($_REQUEST['path'], ['errors' => $errors]);
 }
 
 header('Location: /index.php?path=file_list&id=' . $myrow['id_user'] . '');

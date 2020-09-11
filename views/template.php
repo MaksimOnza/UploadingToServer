@@ -1,13 +1,13 @@
 <?php
 /**
- * @var $content array
+ * @var $content string
  */
 require_once 'views/header.php';
 ?>
 
     <div class="container">
         <h1>CONTENT</h1>
-        <?php print $content; ?>
+        <?php print $content ?>
     </div>
 
 <?php
