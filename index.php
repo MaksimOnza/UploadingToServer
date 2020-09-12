@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once("db.php");
 require_once 'actions/valid_code.php';
@@ -18,25 +19,23 @@ $list_of_path = array(
 
 function run_action($path, $list_of_path)
 {
-    ob_start();
-    if (in_array($path, $list_of_path)) {
-        include 'actions/' . $path . '.php';
-        $out_ob = ob_get_contents();
-    } else {
-        include 'actions/error_404.php';
-        $out_ob = ob_get_contents();
-    }
-    ob_clean();
-    return $out_ob;
+    $action = in_array($path, $list_of_path) ? 'actions/' . $path . '.php' : 'actions/error_404.php';
+    return include $action;
 }
 
-function render($path, array $var = []): string
+function render($path, array $vars = []): string
 {
-    extract($var);
+    extract($vars);
     ob_start();
     require_once 'views/' . $path . '.php';
-    return ob_get_contents();
+    $content = ob_get_contents();
+    ob_clean();
+    return $content;
 }
 
 $content = run_action($path, $list_of_path);
 $template = render('template', ['content' => $content]);
+
+
+//сделать: расшарить файл лругому пользователю, где будет пометка от кого этот файл.
+//

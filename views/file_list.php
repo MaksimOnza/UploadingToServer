@@ -30,7 +30,7 @@
         }
     </style>
     <div class="input-group input-group-prepend" style="margin: 5px">
-        <form action="/index.php?path=upload&id=<?= $_REQUEST['id'] ?>" method="POST" enctype="multipart/form-data">
+        <form action="/index.php?path=upload" method="POST" enctype="multipart/form-data">
             <div class="input-group" style="margin: 5px">
                 <input style="margin: 10px; width: 295px" class="form-control form-control-file" type="file" id="out_"
                        name="inputFile">

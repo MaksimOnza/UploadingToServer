@@ -40,7 +40,7 @@ function password_validation_check($str, $min, $max)
 
 function id_validation_check($id)
 {
-    if (!empty($id)) {
+    if (empty($id)) {
         return false;
     }
     if (!is_numeric($id)) {

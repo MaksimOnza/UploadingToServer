@@ -34,6 +34,22 @@ function query_select($query)
     return $results;
 }
 
+function query_select2($query, $bind_values)
+{
+    $db = open_db();
+    $statemant = $db->prepare($query);
+    foreach($bind_values as $key=>$value){
+        $statemant->bindValue($key, $value, SQLITE3_TEXT);
+    }
+    $stmt = $statemant->execute();
+    $results = [];
+    while ($row = $stmt->fetchArray(1)) {
+        $results[] = $row;
+    }
+    $statemant->close();
+    return $results;
+}
+
 function query_insert($file_name, $file_path, $user_id)
 {
     $db = open_db();

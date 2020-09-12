@@ -2,13 +2,11 @@
 /**
  * @var $content string
  */
-render('header', []);
 ?>
+<?= render('header') ?>
+<div class="container">
+    <h1>CONTENT</h1>
+    <?= $content ?>
+</div>
+<?= render('footer') ?>
 
-    <div class="container">
-        <h1>CONTENT</h1>
-        <?php print $content ?>
-    </div>
-
-<?php
-render('footer', []);

@@ -14,5 +14,5 @@ header('Expires: 0');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Content-Length: ' . filesize($file_path));
-readfile($file_path);
-exit();
+$fp = fopen($file_path, 'rb');
+fpassthru($fp);
