@@ -9,7 +9,7 @@ if (empty($login) or empty($password)) {
     return render($reload_path, ['errors' => $errors]);
 }
 
-$result = query_select2("SELECT * FROM users WHERE login_user = ?", [1 => $login]);
+$result = query_select("SELECT * FROM users WHERE login_user = ?", [1 => $login]);
 $user = $result[0];
 
 if (empty($user['login_user']) or (!password_verify($password, $user['pass_user']))) {
@@ -20,4 +20,5 @@ if ($errors !== []) {
     return render($reload_path, ['errors' => $errors]);
 }
 $_SESSION['user_id'] = $user['id_user'];
+$_SESSION['user_name'] = $user['login_user'];
 header('Location: /index.php?path=file_list');

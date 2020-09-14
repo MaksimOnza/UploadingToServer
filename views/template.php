@@ -4,7 +4,7 @@
  */
 ?>
 <?= render('header') ?>
-<div class="container">
+<div class="container" align="center">
     <h1>CONTENT</h1>
     <?= $content ?>
 </div>

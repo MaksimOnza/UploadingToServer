@@ -1,3 +1,3 @@
 <?php
-print empty($_REQUEST['path']).' empty';
-render('error_404');
+//print empty($_REQUEST['path']).' empty';
+return render('error_404');
