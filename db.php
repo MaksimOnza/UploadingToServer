@@ -1,6 +1,5 @@
 <?php
 
-
 function open_db()
 {
     return new \SQLite3('mysqlitedb.db');
@@ -39,6 +38,7 @@ function create_table()
             id_file integer PRIMARY KEY,
             file_name text NOT NULL,
             file_path text NOT NULL,
-            user_id integer NOT NUll
+            user_id integer NOT NUll,
+            own_file text NOT NULL
             );');
 }

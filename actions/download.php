@@ -2,7 +2,7 @@
 
 require_once 'db.php';
 
-$id = (int)$_GET['id'];
+$id = (int)$_REQUEST['id'];
 $file = query_select('SELECT file_name, file_path FROM files_name WHERE id_file = ' . $id)[0];
 $file_name = $file['file_name'];
 $file_path = $file['file_path'];
@@ -16,3 +16,5 @@ header('Pragma: public');
 header('Content-Length: ' . filesize($file_path));
 $fp = fopen($file_path, 'rb');
 fpassthru($fp);
+
+

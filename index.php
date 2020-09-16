@@ -34,8 +34,10 @@ function render($path, array $vars = []): string
 }
 
 $content = run_action($path, $list_of_path);
-$template = render('template', ['content' => $content]);
-
+$header = render('header');
+$footer = render('footer');
+$template = render('template', ['content' => $content, 'header' => $header, 'footer' => $footer]);
+print $template;
 
 //сделать: расшарить файл другому пользователю, где будет пометка от кого этот файл.
 //

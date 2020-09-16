@@ -3,3 +3,6 @@
 mysqlitedb.db
 test.php
 test_*
+jquery-*.min.js
+/css
+/js

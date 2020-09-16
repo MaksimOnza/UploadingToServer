@@ -1,12 +1,13 @@
 <?php
 /**
  * @var $content string
+ * @var $header string
+ * @var $footer string
  */
+
 ?>
-<?= render('header') ?>
-<div class="container" align="center">
+<?= $header ?>
     <h1>CONTENT</h1>
     <?= $content ?>
-</div>
-<?= render('footer') ?>
+<?= $footer ?>
 
