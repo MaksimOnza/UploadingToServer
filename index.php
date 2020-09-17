@@ -15,6 +15,7 @@ $list_of_path = array(
     "file_list",
     "upload",
     "download",
+    "sending",
 );
 
 function run_action($path, $list_of_path)
@@ -34,10 +35,7 @@ function render($path, array $vars = []): string
 }
 
 $content = run_action($path, $list_of_path);
-$header = render('header');
-$footer = render('footer');
-$template = render('template', ['content' => $content, 'header' => $header, 'footer' => $footer]);
+$template = render('template', ['content' => $content]);
 print $template;
 
 //сделать: расшарить файл другому пользователю, где будет пометка от кого этот файл.
-//

@@ -6,8 +6,8 @@
  */
 
 ?>
-<?= $header ?>
+<?= render('header'); ?>
     <h1>CONTENT</h1>
     <?= $content ?>
-<?= $footer ?>
+<?= render('footer'); ?>
 
