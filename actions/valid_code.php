@@ -1,22 +1,5 @@
 <?php
 
-
-function check_file_name($file_name){
-    $query_sel = "SELECT file_name FROM files_name";
-    $files = query_select($query_sel);
-    if(in_array($file_name, $files))
-        return true;
-    return false;
-}
-
-function check_user($user){
-    $query_sel = "SELECT login_user FROM users";
-    $users = query_select($query_sel);
-    if(in_array($user, $users))
-        return true;
-    return false;
-}
-
 function login_validation_check($login, $min, $max)
 {
     $resp_users = query_select("SELECT login_user FROM users");
@@ -54,18 +37,6 @@ function password_validation_check($str, $min, $max)
     }
     return true;
 }
-
-function id_validation_check($id)
-{
-    if (empty($id)) {
-        return false;
-    }
-    if (!is_numeric($id)) {
-        return false;
-    }
-    return true;
-}
-
 
 function valid_letter_and_int($str)
 {
