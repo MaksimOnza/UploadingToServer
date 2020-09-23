@@ -48,7 +48,7 @@
             <select id="select_user" style="margin: 10px; width: 305px" size="1" name="list_db[]">
                 <?php
                     foreach ($users as $user) {
-                        print '<option >' . $user['login_user'] . '</option>';
+                        print '<option value="'.$user['id_user'].'">' . $user['login_user'] . '</option>';
                     }
                 ?>
             </select>

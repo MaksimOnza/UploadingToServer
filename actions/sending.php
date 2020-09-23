@@ -1,36 +1,31 @@
 <?php
 
 $id_file = $_POST['id_file'];
-$id_user = $_SESSION['user_id'];
 $own_file = $_SESSION['user_name'];
 $file_name = $_POST['file_name'];
-$target_user = $_POST['target_user_name'];
+$target_user_id = $_POST['target_user_id'];
 
-if (!is_numeric($id_file) and !is_numeric($id_user)) {
+if (!is_numeric($id_file)) {
     return false;
 }
 
-$query = "SELECT file_name FROM files_name WHERE id_file = ?";
-$file_name_from_db = query_select($query, [1 => $id_file])[0]['file_name'];
+$query = "SELECT file_name, file_path FROM files_name WHERE id_file = ?";
+$file_from_db = query_select($query, [1 => $id_file])[0];
+$file_name_from_db = $file_from_db['file_name'];
+$file_path_from_db = $file_from_db['file_path'];
 if ($file_name_from_db != $file_name) {
     return false;
 }
-$query = "SELECT login_user FROM users";
-$users_from_db = query_select($query)[0];
-if (!in_array($target_user, $users_from_db)) {
+if (is_numeric($target_user_id)) {
     return false;
 }
-
-$query_sel = "SELECT id_user FROM users WHERE login_user = ?";
-$target_user_id = query_select($query_sel, [1 => $target_user])[0]['id_user'];
-
-$file_name_uniq = uniqid();
-$file_path = 'upload/' . $file_name_uniq;
+$query_sel = "SELECT login_user FROM users WHERE id_user = ?";
+$target_user_name = query_select($query_sel, [1 => $target_user_id])[0]['login_user'];
 
 $query = "INSERT INTO files_name(file_name, file_path, user_id, own_file) VALUES(?, ?, ?, ?)";
 query_insert($query, [
     1 => $file_name,
-    2 => $file_path,
+    2 => $file_path_from_db,
     3 => $target_user_id,
     4 => $own_file,
 ]);
