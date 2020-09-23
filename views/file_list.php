@@ -22,16 +22,6 @@
     </table>
 </div>
 
-<div style="float: left">
-    <?php
-        if($_SESSION['user_name'] === 'admin'){
-            foreach ($users as $user) {
-                print '<h4 >' . $user['login_user'] . '</h4>';
-            }
-        }
-    ?>
-</div>
-
 <div class="input-group input-group-prepend" style="margin: 5px">
     <form action="/index.php?path=upload" method="POST" enctype="multipart/form-data">
         <br><p><h3 class="h3_body">Upload your file to server:</h3></p>
@@ -42,7 +32,6 @@
                    name="submit">
         </div>
     </form>
-
     <div id="result_form1"></div>
     <form id="select_form" action="" method="post" >
         <br><p ><h3 class="h3_body" >Transfer to other user:</h3></p>

@@ -9,7 +9,6 @@
             }
         );
     });
-
     function sendAjaxForm(result_form, ajax_form, url) {
         var target_user_name = document.getElementById('select_user').value;
         var id_file = document.getElementById('select_name_file').value;

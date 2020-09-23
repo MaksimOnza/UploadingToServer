@@ -9,13 +9,12 @@ $target_user = $_POST['target_user_name'];
 if (!is_numeric($id_file) and !is_numeric($id_user)) {
     return false;
 }
+
 $query = "SELECT file_name FROM files_name WHERE id_file = ?";
 $file_name_from_db = query_select($query, [1 => $id_file])[0]['file_name'];
-
 if ($file_name_from_db != $file_name) {
     return false;
 }
-
 $query = "SELECT login_user FROM users";
 $users_from_db = query_select($query)[0];
 if (!in_array($target_user, $users_from_db)) {
@@ -40,5 +39,3 @@ query_insert($query, [
 //через айдишник файла найти файл в базе и сравнить его с полученным.
 //через айдишник юзера найти юзера в базе и сравнить его с полученным.
 //если предыдущие условия тру, тогда выполнить передачу ссылки др юзеру
-
-//сделать файл для тестовых SQL запросов

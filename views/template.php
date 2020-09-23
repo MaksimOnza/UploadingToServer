@@ -10,4 +10,3 @@
     <h1>CONTENT</h1>
     <?= $content ?>
 <?= render('footer'); ?>
-
