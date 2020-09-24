@@ -2,7 +2,6 @@
 
 $id_file = $_POST['id_file'];
 $own_file = $_SESSION['user_name'];
-$file_name = $_POST['file_name'];
 $target_user_id = $_POST['target_user_id'];
 
 if (!is_numeric($id_file)) {
@@ -13,9 +12,6 @@ $query = "SELECT file_name, file_path FROM files_name WHERE id_file = ?";
 $file_from_db = query_select($query, [1 => $id_file])[0];
 $file_name_from_db = $file_from_db['file_name'];
 $file_path_from_db = $file_from_db['file_path'];
-if ($file_name_from_db != $file_name) {
-    return false;
-}
 
 if (!is_numeric($target_user_id)) {
     return false;
@@ -25,7 +21,7 @@ $target_user_name = query_select($query_sel, [1 => $target_user_id])[0]['login_u
 
 $query = "INSERT INTO files_name(file_name, file_path, user_id, own_file) VALUES(?, ?, ?, ?)";
 query_insert($query, [
-    1 => $file_name,
+    1 => $file_name_from_db,
     2 => $file_path_from_db,
     3 => $target_user_id,
     4 => $own_file,
