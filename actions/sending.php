@@ -16,7 +16,8 @@ $file_path_from_db = $file_from_db['file_path'];
 if ($file_name_from_db != $file_name) {
     return false;
 }
-if (is_numeric($target_user_id)) {
+
+if (!is_numeric($target_user_id)) {
     return false;
 }
 $query_sel = "SELECT login_user FROM users WHERE id_user = ?";
@@ -29,7 +30,6 @@ query_insert($query, [
     3 => $target_user_id,
     4 => $own_file,
 ]);
-
 //через значенеи в option передать айдишник файла
 //через айдишник файла найти файл в базе и сравнить его с полученным.
 //через айдишник юзера найти юзера в базе и сравнить его с полученным.

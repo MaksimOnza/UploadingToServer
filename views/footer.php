@@ -10,18 +10,15 @@
         );
     });
     function sendAjaxForm(result_form, ajax_form, url) {
-        var target_user = document.getElementById('select_user');
-        var target_user_id = target_user.options[target_user.selectedIndex].innerText;
-        var target_user_name = document.getElementById('select_user').value;
+        var target_user_id = document.getElementById('select_user').value;
         var id_file = document.getElementById('select_name_file').value;
-        var user_name = document.getElementById('name_user').innerText;
         var tag_options = document.getElementById('select_name_file');
         var file_name = tag_options.options[tag_options.selectedIndex].innerText;
         $.ajax({
             url: url,
             type: "POST",
             dataType: "html",
-            data: {'target_user_id': target_user_id, 'file_name': file_name, 'own_file': user_name, 'id_file': id_file},
+            data: {'target_user_id': target_user_id, 'file_name': file_name, 'id_file': id_file},
             success: function (response) {
                 $('#result_form').html(response);
             },
