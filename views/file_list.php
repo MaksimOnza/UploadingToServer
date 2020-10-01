@@ -32,7 +32,7 @@
                    name="submit">
         </div>
     </form>
-    <div id="result_form1"></div>
+    <div id="result_form"></div>
     
     <form id="select_form" action="" method="post" >
         <br><p ><h3 class="h3_body" >Transfer to other user:</h3></p>

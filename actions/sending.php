@@ -1,9 +1,10 @@
 <?php
-print 'IN SENDING';
+
 $id_file = $_POST['id_file'];
 $target_user = $_POST['target_user_id'];
+$user_id = $_SESSION['user_id'];
 
-if($target_user != $_SESSION['user_id']){
+if($target_user != $user_id){
     if (!is_numeric($id_file)) {
         return false;
     }
@@ -27,3 +28,5 @@ if($target_user != $_SESSION['user_id']){
         5 => $own_user,
     ]);
 }
+
+header('location: index.php/?path=file_list&id=' . $user_id . '');
