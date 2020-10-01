@@ -20,7 +20,6 @@ if($own_user != $id_current_user){
     $query = 'DELETE FROM list_links WHERE id_file = ?';
     query_delete($query, [1 => $id_file]);
 }
-//query_delete($query, $param);
 
 
 header('location: index.php/?path=file_list&id=' . $id_current_user . '');
