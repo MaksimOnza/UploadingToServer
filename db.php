@@ -32,6 +32,17 @@ function query_insert($query, $bind_values=[])
     $statemant->close();
 }
 
+function query_delete($query, $bind_values=[])
+{
+    $db = open_db();
+    $statemant = $db->prepare($query);
+    foreach($bind_values as $key=>$value){
+        $statemant->bindValue($key, $value, SQLITE3_TEXT);
+    }
+    $stmt = $statemant->execute();
+    $statemant->close();
+}
+
 function create_table()
 {
     execute('CREATE TABLE IF NOT EXISTS files_name (

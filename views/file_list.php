@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $files array
+ * @var $links array
  * @var $users array
  */
 ?>
@@ -15,8 +15,8 @@
             <th>Owner</th>
         </tr>
         <?php
-            foreach ($files as $row) {
-                print '<tr align="center"><td>' . $row['file_name'] . '</td><td><a href="index.php?path=download&id=' . $row['id_file'] . '">' . $_SERVER['HTTP_HOST'] . '/actions/download.php?id=' . $row['id_file'] . '</a></td><td>' . $row['own_file'] . '</td></tr>';
+            foreach ($links as $row) {
+                print '<tr align="center"><td>' . $row['name_file'] . '</td><td><a href="index.php?path=download&id=' . $row['id_file'] . '">' . $_SERVER['HTTP_HOST'] . '/actions/download.php?id=' . $row['id_file'] . '</a></td><td>' . $row['own_user'] . '</td></tr>';
             }
         ?>
     </table>
@@ -33,13 +33,15 @@
         </div>
     </form>
     <div id="result_form1"></div>
+    
     <form id="select_form" action="" method="post" >
         <br><p ><h3 class="h3_body" >Transfer to other user:</h3></p>
         <div class="input-group" style="margin: 5px ">
+            <input id="delete" style="margin: 10px" class="btn btn-outline-secondary btn-light" type="button"value="Delete file">
             <select id="select_name_file" style="margin: 10px; width: 305px" size="1" id="listPath" name="list_db[]">
                 <?php
-                    foreach ($files as $row) {
-                        print '<option value="'.$row['id_file'].'">' . $row['file_name'] . '</option>';
+                    foreach ($links as $row) {
+                        print '<option value="'.$row['id_file'].'">' . $row['name_file'] . '</option>';
                     }
                 ?>
             </select>
@@ -52,6 +54,7 @@
                     }
                 ?>
             </select>
+            
         </div>
     </form>
 </div>

@@ -2,13 +2,13 @@
 session_start();
 
 require_once("db.php");
-require_once 'actions/valid_code.php';
+require_once 'valid_code.php';
 
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 
 $errors = [];
-$path = $_REQUEST['path'];
+$path = $_REQUEST['path'];print $path;
 $list_of_path = array(
     "login",
     "register",
@@ -16,6 +16,7 @@ $list_of_path = array(
     "upload",
     "download",
     "sending",
+    "deleting_file",
 );
 
 function run_action($path, $list_of_path)
