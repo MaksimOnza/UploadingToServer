@@ -5,6 +5,26 @@ function open_db()
     return new \SQLite3('mysqlitedb.db');
 }
 
+function query_get($query, $bind_values=[]){
+    $db = open_db();
+    $statemant = $db->prepare($query);
+    foreach($bind_values as $key=>$value){
+        $statemant->bindValue($key, $value, SQLITE3_TEXT);
+    }
+    $statemant->execute();
+    $statemant->close();
+}
+
+function query_insert($query, $bind_values)
+{
+    query_get($query, $bind_values);
+}
+
+function query_delete($query, $bind_values)
+{
+    query_get($query, $bind_values);
+}
+
 function query_select($query, $bind_values = [])
 {
     $db = open_db();
@@ -19,28 +39,6 @@ function query_select($query, $bind_values = [])
     }
     $statemant->close();
     return $results;
-}
-
-function query_insert($query, $bind_values=[])
-{
-    $db = open_db();
-    $statemant = $db->prepare($query);
-    foreach($bind_values as $key=>$value){
-        $statemant->bindValue($key, $value, SQLITE3_TEXT);
-    }
-    $stmt = $statemant->execute();
-    $statemant->close();
-}
-
-function query_delete($query, $bind_values=[])
-{
-    $db = open_db();
-    $statemant = $db->prepare($query);
-    foreach($bind_values as $key=>$value){
-        $statemant->bindValue($key, $value, SQLITE3_TEXT);
-    }
-    $stmt = $statemant->execute();
-    $statemant->close();
 }
 
 function create_table()

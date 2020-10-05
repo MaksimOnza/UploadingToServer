@@ -1,8 +1,6 @@
 <?php
 /**
  * @var $content string
- * @var $header string
- * @var $footer string
  */
 
 ?>

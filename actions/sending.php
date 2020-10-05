@@ -4,7 +4,7 @@ $id_file = $_POST['id_file'];
 $target_user = $_POST['target_user_id'];
 $user_id = $_SESSION['user_id'];
 
-if($target_user != $user_id){
+if ($target_user != $user_id) {
     if (!is_numeric($id_file)) {
         return false;
     }

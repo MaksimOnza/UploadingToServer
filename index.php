@@ -38,3 +38,10 @@ function render($path, array $vars = []): string
 $content = run_action($path, $list_of_path);
 $template = render('template', ['content' => $content]);
 print $template;
+//todo
+//перенести delete
+//красивый интерфейс
+//убрать лишние запросы к бд
+//s print f
+
+//CHAT
