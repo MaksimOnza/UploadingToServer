@@ -17,7 +17,12 @@
         </tr>
         <?php
             foreach ($links as $row) {
-                print '<tr align="center"><td>' . $row['name_file'] . '</td><td><a href="index.php?path=download&id=' . $row['id_file'] . '">' . $_SERVER['HTTP_HOST'] . '/actions/download.php?id=' . $row['id_file'] . '</a></td><td>' . $name_users[$row['own_user']] . '</td></tr>';
+                print '<tr align="center"><td>' . $row['name_file']
+                    . '</td><td><a href="index.php?path=download&id='
+                    . $row['id_file'] . '">' . $_SERVER['HTTP_HOST']
+                    . '/actions/download.php?id=' . $row['id_file']
+                    . '</a></td><td>' . $name_users[$row['own_user']]
+                    . '</td></tr>';
             }
         ?>
     </table>
